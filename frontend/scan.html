@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Food Scanner & AI Analysis - NutriVision AI</title>
+  <meta name="description" content="NutriVision AI Food Scanner - Upload food photos, analyze calories and macronutrients, and track your daily nutrition.">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🥗</text></svg>">
+</head>
+<body>
+
+  <!-- Navigation Bar -->
+  <header class="navbar">
+    <div class="container nav-container">
+      <a href="index.html" class="brand-logo">
+        <div class="brand-icon">
+          <svg viewBox="0 0 24 24">
+            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14.5v-9l6 4.5-6 4.5z"/>
+          </svg>
+        </div>
+        <span class="brand-name">NutriVision AI</span>
+      </a>
+
+      <nav>
+        <ul class="nav-links">
+          <li><a href="index.html" class="nav-link">Home</a></li>
+          <li><a href="scan.html" class="nav-link active">Food Scanner</a></li>
+          <li><a href="#dashboard" class="nav-link">Daily Dashboard</a></li>
+        </ul>
+      </nav>
+
+      <div>
+        <a href="index.html" class="btn btn-secondary btn-sm">
+          <span>← Back to Overview</span>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Workspace Container -->
+  <main class="container">
+    
+    <!-- Workspace Title Row -->
+    <div class="workspace-header">
+      <div>
+        <h1 class="page-title">AI Food Scanner & Nutrient Analysis</h1>
+      </div>
+      <div style="font-size: 0.85rem; color: #94a3b8; display: flex; align-items: center; gap: 0.5rem;">
+        <span class="badge-pulse"></span>
+        <span>Vision Pipeline: <strong>Ready (Simulated)</strong></span>
+      </div>
+    </div>
+
+    <!-- Quick Sample Dishes Selection Bar for Fast Faculty Testing -->
+    <div class="sample-selector-wrap">
+      <div class="sample-selector-title">
+        <span>⚡ Quick Specimen Demo: Choose a Sample Dish or Upload Below</span>
+        <span style="font-size: 0.75rem; color: #64748b;">1-Click Instant Specimen</span>
+      </div>
+      <div class="sample-chips">
+        <button type="button" class="sample-chip active" data-food="chicken-rice">
+          <span>🍗 Grilled Chicken Rice</span>
+        </button>
+        <button type="button" class="sample-chip" data-food="avocado-toast">
+          <span>🥑 Avocado Toast & Egg</span>
+        </button>
+        <button type="button" class="sample-chip" data-food="paneer-tikka">
+          <span>🧀 Paneer Tikka Bowl</span>
+        </button>
+        <button type="button" class="sample-chip" data-food="salmon-quinoa">
+          <span>🐟 Salmon & Quinoa</span>
+        </button>
+        <button type="button" class="sample-chip" data-food="green-salad">
+          <span>🥗 Mediterranean Salad</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Main Scanner & Result Two-Column Grid -->
+    <div class="scanner-grid">
+      
+      <!-- Left Column: Dropzone, Image Preview, Scanner Controls -->
+      <div class="dropzone-container">
+        
+        <!-- Drag and Drop Box -->
+        <div class="dropzone" id="dropzone">
+          <input type="file" id="fileInput" accept="image/png, image/jpeg, image/webp">
+          <div class="dropzone-icon">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+              <polyline points="17 8 12 3 7 8"></polyline>
+              <line x1="12" y1="3" x2="12" y2="15"></line>
+            </svg>
+          </div>
+          <div class="dropzone-title">Upload food image or drag & drop</div>
+          <div class="dropzone-sub">Supports JPG, PNG, WEBP (Max 10MB)</div>
+        </div>
+
+        <!-- Image Preview Frame with Active Laser Scanner Beam -->
+        <div class="preview-wrapper" id="previewWrapper">
+          <img id="previewImage" class="preview-image" src="" alt="Food Preview">
+          <div class="scanner-laser"></div>
+          
+          <div class="preview-overlay-info">
+            <span id="previewSubtext" style="color: #cbd5e1; font-weight: 500;">Ready for AI analysis</span>
+            <span style="font-size: 0.72rem; color: #10b981; font-weight: 600;">RGB Tensor Ready</span>
+          </div>
+        </div>
+
+        <!-- Scan Controls & Buttons -->
+        <div class="scan-controls">
+          <button type="button" class="btn btn-primary" id="analyzeBtn" style="flex: 1;">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polygon points="5 3 19 12 5 21 5 3"></polygon>
+            </svg>
+            <span>Analyze Food</span>
+          </button>
+        </div>
+
+        <!-- Processing Step Status Bar -->
+        <div class="ai-status-box" id="aiStatusBox">
+          <div class="spinner"></div>
+          <span id="aiStatusText">Initializing vision neural net...</span>
+        </div>
+
+      </div>
+
+      <!-- Right Column: AI Analysis Result Panel -->
+      <div class="results-container">
+        
+        <!-- Empty State (Shown before first analysis) -->
+        <div class="result-empty-state" id="resultEmptyState">
+          <div class="result-empty-icon">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <circle cx="12" cy="12" r="10"></circle>
+              <line x1="12" y1="8" x2="12" y2="12"></line>
+              <line x1="12" y1="16" x2="12.01" y2="16"></line>
+            </svg>
+          </div>
+          <h3 style="font-size: 1.15rem; margin-bottom: 0.35rem;">Awaiting Analysis</h3>
+          <p style="font-size: 0.9rem; max-width: 320px; margin: 0 auto;">
+            Click <strong>"Analyze Food"</strong> to run the computer vision inference pipeline and extract nutritional data.
+          </p>
+        </div>
+
+        <!-- Result Card (Populated by JavaScript) -->
+        <div class="glass-card result-card" id="resultCard">
+          
+          <!-- Top Header: Dish Name & Confidence -->
+          <div class="result-header">
+            <div>
+              <div style="font-size: 0.75rem; text-transform: uppercase; color: #10b981; font-weight: 700; letter-spacing: 0.05em; margin-bottom: 0.2rem;">
+                AI Recognition Match
+              </div>
+              <h2 class="result-food-title" id="resFoodTitle">Grilled Chicken Rice</h2>
+            </div>
+            <div class="confidence-badge" id="resFoodConfidence">
+              <span class="badge-pulse" style="width: 6px; height: 6px;"></span>
+              96.4% Confidence
+            </div>
+          </div>
+
+          <!-- Nutritional Breakdown Cards (5 Metrics) -->
+          <div class="nutrition-grid">
+            
+            <!-- Calories -->
+            <div class="nutrient-card cal">
+              <div class="nutrient-label">Calories</div>
+              <div class="nutrient-val"><span id="resCal">620</span><span class="nutrient-unit">kcal</span></div>
+            </div>
+
+            <!-- Protein -->
+            <div class="nutrient-card pro">
+              <div class="nutrient-label">Protein</div>
+              <div class="nutrient-val"><span id="resPro">32</span><span class="nutrient-unit">g</span></div>
+            </div>
+
+            <!-- Carbs -->
+            <div class="nutrient-card carb">
+              <div class="nutrient-label">Carbs</div>
+              <div class="nutrient-val"><span id="resCarb">72</span><span class="nutrient-unit">g</span></div>
+            </div>
+
+            <!-- Fat -->
+            <div class="nutrient-card fat">
+              <div class="nutrient-label">Fat</div>
+              <div class="nutrient-val"><span id="resFat">20</span><span class="nutrient-unit">g</span></div>
+            </div>
+
+            <!-- Fiber -->
+            <div class="nutrient-card fib">
+              <div class="nutrient-label">Fiber</div>
+              <div class="nutrient-val"><span id="resFib">4</span><span class="nutrient-unit">g</span></div>
+            </div>
+
+          </div>
+
+          <!-- Clinical / Dietary Assessment Banner -->
+          <div class="assessment-box moderate" id="resAssessmentBox">
+            <span class="assessment-icon" id="resAssessmentIcon">⚠️</span>
+            <div class="assessment-text" id="resAssessmentText">
+              Moderate — good protein but relatively high in calories and simple carbohydrates.
+            </div>
+          </div>
+
+          <!-- Actionable Suggestions -->
+          <div class="suggestions-box">
+            <div class="suggestions-title">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M14 9V5a3 3 0 0 0-3-3l-4 9v11h11.28a2 2 0 0 0 2-1.7l1.38-9a2 2 0 0 0-2-2.3zM7 22H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h3"></path>
+              </svg>
+              <span>Dietary Suggestions</span>
+            </div>
+            <ul class="suggestion-items" id="resSuggestionsList">
+              <li class="suggestion-item">
+                <span class="suggestion-bullet">✔</span>
+                <span>Swap white rice with brown rice or quinoa for higher dietary fiber and lower GI.</span>
+              </li>
+              <li class="suggestion-item">
+                <span class="suggestion-bullet">✔</span>
+                <span>Add steamed broccoli or mixed salad to increase micronutrient density.</span>
+              </li>
+              <li class="suggestion-item">
+                <span class="suggestion-bullet">✔</span>
+                <span>Reduce cooking oil or skin on chicken to lower saturated fat content.</span>
+              </li>
+            </ul>
+          </div>
+
+          <!-- Action to log into Daily Dashboard -->
+          <button type="button" class="btn btn-primary" id="logMealBtn" style="width: 100%;">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path>
+              <polyline points="17 21 17 13 7 13 7 21"></polyline>
+              <polyline points="7 3 7 8 15 8"></polyline>
+            </svg>
+            <span>Log to Today's Dashboard</span>
+          </button>
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- Section 5: Daily Nutrition Dashboard -->
+    <section class="dashboard-section" id="dashboard">
+      <div class="dashboard-head">
+        <div>
+          <div class="badge-pill" style="margin-bottom: 0.4rem;">Real-time Telemetry</div>
+          <h2 style="font-size: 1.85rem;">Today's Nutrition Dashboard</h2>
+        </div>
+        <div style="font-size: 0.85rem; color: #94a3b8;">
+          Daily Target Goal: <strong style="color: #f8fafc;">2,200 kcal / 120g Protein</strong>
+        </div>
+      </div>
+
+      <div class="dashboard-grid">
+        
+        <!-- Left: Macro Target Stat Cards -->
+        <div class="stats-grid">
+          
+          <!-- Calories Stat -->
+          <div class="stat-card">
+            <div class="stat-head">
+              <span class="stat-title">Calories</span>
+              <span style="font-size: 0.75rem; color: #10b981; font-weight: 600;">Daily Energy</span>
+            </div>
+            <div class="stat-val-row">
+              <span class="stat-val" id="dashCal">630</span>
+              <span class="stat-target">/ 2,200 kcal</span>
+            </div>
+            <div class="progress-track">
+              <div class="progress-fill fill-cal" id="dashCalProgress" style="width: 28%;"></div>
+            </div>
+          </div>
+
+          <!-- Protein Stat -->
+          <div class="stat-card">
+            <div class="stat-head">
+              <span class="stat-title">Protein</span>
+              <span style="font-size: 0.75rem; color: #06b6d4; font-weight: 600;">Muscle Repair</span>
+            </div>
+            <div class="stat-val-row">
+              <span class="stat-val" id="dashPro">34g</span>
+              <span class="stat-target">/ 120g</span>
+            </div>
+            <div class="progress-track">
+              <div class="progress-fill fill-pro" id="dashProProgress" style="width: 28%;"></div>
+            </div>
+          </div>
+
+          <!-- Carbs Stat -->
+          <div class="stat-card">
+            <div class="stat-head">
+              <span class="stat-title">Carbohydrates</span>
+              <span style="font-size: 0.75rem; color: #f59e0b; font-weight: 600;">Glycemic Load</span>
+            </div>
+            <div class="stat-val-row">
+              <span class="stat-val" id="dashCarb">46g</span>
+              <span class="stat-target">/ 250g</span>
+            </div>
+            <div class="progress-track">
+              <div class="progress-fill fill-carb" id="dashCarbProgress" style="width: 18%;"></div>
+            </div>
+          </div>
+
+          <!-- Fat Stat -->
+          <div class="stat-card">
+            <div class="stat-head">
+              <span class="stat-title">Lipids / Fat</span>
+              <span style="font-size: 0.75rem; color: #f43f5e; font-weight: 600;">Essential Fats</span>
+            </div>
+            <div class="stat-val-row">
+              <span class="stat-val" id="dashFat">32g</span>
+              <span class="stat-target">/ 70g</span>
+            </div>
+            <div class="progress-track">
+              <div class="progress-fill fill-fat" id="dashFatProgress" style="width: 45%;"></div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Bottom Full-Width Table: Logged Meals Today -->
+        <div class="glass-card recent-meals-box">
+          <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 1rem;">
+            <h3 style="font-size: 1.1rem;">Logged Food Intake (Today)</h3>
+            <span style="font-size: 0.8rem; color: #94a3b8;">Auto-aggregated from AI vision scan logs</span>
+          </div>
+
+          <div style="overflow-x: auto;">
+            <table class="meals-table">
+              <thead>
+                <tr>
+                  <th>Time</th>
+                  <th>Food Item</th>
+                  <th>Calories</th>
+                  <th>Macronutrient Split</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody id="mealsTableBody">
+                <!-- Dynamically generated by app.js -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container footer-flex">
+      <div>
+        <div style="font-weight: 700; color: #f8fafc; font-size: 1.1rem; margin-bottom: 0.25rem;">NutriVision AI</div>
+        <p style="font-size: 0.82rem; margin: 0;">AI-assisted dietary recognition and nutritional estimation system.</p>
+      </div>
+
+      <div style="display: flex; gap: 1.5rem; align-items: center;">
+        <a href="index.html" class="nav-link" style="font-size: 0.85rem;">Home Overview</a>
+        <a href="#dashboard" class="nav-link" style="font-size: 0.85rem;">Dashboard Top</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Application Logic -->
+  <script src="js/app.js"></script>
+</body>
+</html>

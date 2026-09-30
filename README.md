@@ -1,0 +1,89 @@
+# NutriVision AI
+
+A web-based tool that estimates nutrition and calories from photos of food.
+
+Right now, this repo contains the frontend interface with simulated AI results, built using pure HTML, CSS, and vanilla JavaScript so it's easy to run and test without needing backend setup.
+
+---
+
+## What It Does
+
+- **Landing Page**: Basic introduction with project overview and links to start scanning.
+- **Image Scanner**: Supports uploading files via file picker or drag-and-drop, with an image preview and sample test dishes built in.
+- **Nutritional Breakdown**: Once an image is scanned, it displays:
+  - Detected dish name
+  - Calories (kcal)
+  - Macronutrients (Protein, Carbs, Fat, Fiber)
+  - Quick health summary
+  - Practical suggestions (e.g. portion size, fiber additions)
+- **Daily Dashboard**: Tracks total calories and macros for the day, updates dynamically as you log scanned meals, and includes a table of logged items with timestamps.
+
+---
+
+## Project Structure
+
+```text
+nutrivision/
+├── frontend/
+│   ├── index.html        # Main landing page
+│   ├── scan.html         # Scanner and dashboard interface
+│   ├── css/
+│   │   └── style.css     # Styling and layout
+│   ├── js/
+│   │   └── app.js        # UI logic and mock data
+│   └── assets/           # Media files
+└── README.md
+```
+
+---
+
+## How to Run Locally
+
+You don't need any build steps, npm, or node installed.
+
+### Option 1: Using Python local server
+From the project root:
+
+```bash
+python -m http.server 3000 --directory frontend
+```
+
+Open your browser at:
+```text
+http://localhost:3000
+```
+
+### Option 2: Open directly in browser
+Just double-click `frontend/index.html` or drag it into any web browser.
+
+---
+
+## Connecting Your AI Model API
+
+The analysis in `frontend/js/app.js` currently uses local mock data to simulate how the model responds.
+
+When you have your real backend or AI API ready (such as FastAPI, Gemini Vision, or another vision model), open `frontend/js/app.js` and locate the `runVisionAnalysis()` function. Replace the timeout block with your API call:
+
+```javascript
+// Example using a backend API
+const formData = new FormData();
+formData.append("image", file);
+
+const response = await fetch("http://localhost:8000/api/analyze", {
+  method: "POST",
+  body: formData
+});
+
+const data = await response.json();
+renderAnalysisResult(data);
+```
+
+The UI already expects the result object to have fields for name, calories, protein, carbs, fat, fiber, assessment, and suggestions.
+
+---
+
+## Tech Stack
+
+- **HTML5** for semantic markup
+- **CSS3** (Flexbox, Grid, custom styling, responsive design)
+- **Vanilla JavaScript (ES6+)** for all interactions and state management

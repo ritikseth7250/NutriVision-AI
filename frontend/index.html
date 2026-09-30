@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NutriVision AI - Understand Your Food With AI</title>
+  <meta name="description" content="NutriVision AI - A minimal working prototype for computer vision powered dietary recognition and macronutrient estimation.">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🥗</text></svg>">
+</head>
+<body>
+
+  <!-- Navigation Bar -->
+  <header class="navbar">
+    <div class="container nav-container">
+      <a href="index.html" class="brand-logo">
+        <div class="brand-icon">
+          <svg viewBox="0 0 24 24">
+            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14.5v-9l6 4.5-6 4.5z"/>
+          </svg>
+        </div>
+        <span class="brand-name">NutriVision AI</span>
+      </a>
+
+      <nav>
+        <ul class="nav-links">
+          <li><a href="index.html" class="nav-link active">Home</a></li>
+          <li><a href="#how-it-works" class="nav-link">How It Works</a></li>
+          <li><a href="scan.html" class="nav-link">Food Scanner</a></li>
+          <li><a href="scan.html#dashboard" class="nav-link">Daily Dashboard</a></li>
+        </ul>
+      </nav>
+
+      <div>
+        <a href="scan.html" class="btn btn-primary btn-sm">
+          <span>Launch Scanner</span>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="5" y1="12" x2="19" y2="12"></line>
+            <polyline points="12 5 19 12 12 19"></polyline>
+          </svg>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero-section">
+    <div class="container">
+      <div class="hero-grid">
+        
+        <!-- Left Hero Content -->
+        <div class="hero-text-col">
+          <h1 class="hero-title">
+            Understand Your Food <br>
+            <span class="gradient-text">With AI</span>
+          </h1>
+
+          <p class="hero-desc">
+            NutriVision AI leverages computer vision and intelligent nutritional mapping to transform photos of meals into instant macronutrient profiles, caloric breakdowns, and clinically grounded dietary recommendations.
+          </p>
+
+          <div class="hero-cta">
+            <a href="scan.html" class="btn btn-primary btn-lg" id="scanFoodBtn">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                <circle cx="8.5" cy="8.5" r="1.5"></circle>
+                <polyline points="21 15 16 10 5 21"></polyline>
+              </svg>
+              <span>Scan Food</span>
+            </a>
+
+            <a href="scan.html#dashboard" class="btn btn-secondary btn-lg">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <line x1="18" y1="20" x2="18" y2="10"></line>
+                <line x1="12" y1="20" x2="12" y2="4"></line>
+                <line x1="6" y1="20" x2="6" y2="14"></line>
+              </svg>
+              <span>View Dashboard</span>
+            </a>
+          </div>
+
+          <div class="academic-meta">
+            <div class="meta-item">
+              <span class="label">System Status</span>
+              <span class="val">System Online & Ready</span>
+            </div>
+            <div class="meta-item">
+              <span class="label">Core Focus</span>
+              <span class="val">Vision AI & Nutrition</span>
+            </div>
+            <div class="meta-item">
+              <span class="label">Architecture</span>
+              <span class="val">Modular Frontend (HTML/JS)</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right Hero Visual Interactive Preview Card -->
+        <div class="hero-preview-col">
+          <div class="hero-preview-card">
+            <!-- Simulated Food Box with AI Bounding Box -->
+            <div class="preview-image-box">
+              <svg width="100%" height="100%" viewBox="0 0 400 240" preserveAspectRatio="none">
+                <defs>
+                  <radialGradient id="heroDish" cx="50%" cy="50%" r="50%">
+                    <stop offset="0%" stop-color="#1e293b" />
+                    <stop offset="100%" stop-color="#0b0f19" />
+                  </radialGradient>
+                </defs>
+                <rect width="400" height="240" fill="url(#heroDish)" />
+                <circle cx="200" cy="120" r="85" fill="#152033" stroke="#334155" stroke-width="2"/>
+                <circle cx="200" cy="120" r="68" fill="#1b2842" />
+                <text x="200" y="118" font-family="'Outfit', sans-serif" font-size="20" font-weight="bold" fill="#f8fafc" text-anchor="middle">🍗 Grilled Chicken Rice</text>
+                <text x="200" y="142" font-family="'Inter', sans-serif" font-size="12" fill="#38bdf8" text-anchor="middle">Deep Segmentation Specimen</text>
+              </svg>
+
+              <!-- Simulated bounding box -->
+              <div class="ai-bbox">
+                <span class="ai-bbox-label">Chicken Rice • 96.4%</span>
+              </div>
+            </div>
+
+            <!-- Stat pill row -->
+            <div class="preview-stat-row">
+              <div class="preview-stat-pill">
+                <div class="p-name">Calories</div>
+                <div class="p-val">620 <small style="font-size:0.65rem; color:#94a3b8;">kcal</small></div>
+              </div>
+              <div class="preview-stat-pill">
+                <div class="p-name">Protein</div>
+                <div class="p-val" style="color:#06b6d4;">32 <small style="font-size:0.65rem; color:#94a3b8;">g</small></div>
+              </div>
+              <div class="preview-stat-pill">
+                <div class="p-name">Carbs</div>
+                <div class="p-val" style="color:#f59e0b;">72 <small style="font-size:0.65rem; color:#94a3b8;">g</small></div>
+              </div>
+            </div>
+
+            <div style="margin-top: 1.25rem; text-align: center;">
+              <a href="scan.html" class="btn btn-secondary btn-sm" style="width: 100%; border-color: rgba(16,185,129,0.3);">
+                Try Interactive Food Scanner →
+              </a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- How It Works Section -->
+  <section class="section" id="how-it-works">
+    <div class="container">
+      <div class="section-head">
+        <div class="badge-pill" style="margin-bottom: 0.75rem;">System Flow</div>
+        <h2>How NutriVision AI Operates</h2>
+        <p>A streamlined, three-stage pipeline connecting visual meal recognition to clinical dietary analytics.</p>
+      </div>
+
+      <div class="features-grid">
+        <!-- Feature 1 -->
+        <div class="glass-card feature-card">
+          <div class="feature-icon-wrapper">
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path>
+              <circle cx="12" cy="13" r="4"></circle>
+            </svg>
+          </div>
+          <h3>1. Image Acquisition</h3>
+          <p>
+            Capture via mobile camera or upload dish images with drag-and-drop support. Normalizes orientation, resolution, and exposure for deep network evaluation.
+          </p>
+        </div>
+
+        <!-- Feature 2 -->
+        <div class="glass-card feature-card">
+          <div class="feature-icon-wrapper">
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"></path>
+            </svg>
+          </div>
+          <h3>2. AI Model API Call</h3>
+          <p>
+            Sends the uploaded meal photo to an AI vision model via API. Automatically detects dishes, segments multi-item plates, and extracts ingredients in real time.
+          </p>
+        </div>
+
+        <!-- Feature 3 -->
+        <div class="glass-card feature-card">
+          <div class="feature-icon-wrapper">
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="12" r="10"></circle>
+              <path d="M12 6v6l4 2"></path>
+            </svg>
+          </div>
+          <h3>3. Nutrition & Assessment</h3>
+          <p>
+            Estimates caloric load and macro composition (Protein, Carbs, Fat, Fiber), followed by personalized guidance to assist informed eating habits.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container footer-flex">
+      <div>
+        <div style="font-weight: 700; color: #f8fafc; font-size: 1.1rem; margin-bottom: 0.25rem;">NutriVision AI</div>
+        <p style="font-size: 0.82rem; margin: 0;">AI-assisted dietary recognition and nutritional estimation system.</p>
+      </div>
+
+      <div style="display: flex; gap: 1.5rem; align-items: center;">
+        <a href="scan.html" class="nav-link" style="font-size: 0.85rem;">Food Scanner</a>
+        <a href="scan.html#dashboard" class="nav-link" style="font-size: 0.85rem;">Nutrition Dashboard</a>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>
