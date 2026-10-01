@@ -87,3 +87,23 @@ The UI already expects the result object to have fields for name, calories, prot
 - **HTML5** for semantic markup
 - **CSS3** (Flexbox, Grid, custom styling, responsive design)
 - **Vanilla JavaScript (ES6+)** for all interactions and state management
+
+---
+
+## Key Highlights & Features
+
+- ⚡ **Zero Dependencies**: Pure HTML5, CSS3, and ES6+ JavaScript. No build step or node_modules needed.
+- 🎯 **Interactive Vision Scanner**: Drag-and-drop or file upload with simulated real-time inference scanner animation.
+- 📊 **Macro & Calorie Tracking**: Detailed breakdown for calories, protein, carbs, fat, and dietary fiber.
+- 💡 **Dietary Insights**: Contextual health assessments and tailored meal suggestions based on nutritional density.
+- 📱 **Responsive Design**: Clean glassmorphism UI optimized across desktop and mobile screens.
+
+---
+
+## Roadmap
+
+- [ ] FastAPI backend integration with Google Gemini Vision API
+- [ ] Export daily nutrition logs to CSV / JSON
+- [ ] Custom macro goals and target calorie alerts
+- [ ] Multi-item meal recognition support
+
