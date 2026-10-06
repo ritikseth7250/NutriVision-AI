@@ -58,30 +58,6 @@ Just double-click `frontend/index.html` or drag it into any web browser.
 
 ---
 
-## Connecting Your AI Model API
-
-The analysis in `frontend/js/app.js` currently uses local mock data to simulate how the model responds.
-
-When you have your real backend or AI API ready (such as FastAPI, Gemini Vision, or another vision model), open `frontend/js/app.js` and locate the `runVisionAnalysis()` function. Replace the timeout block with your API call:
-
-```javascript
-// Example using a backend API
-const formData = new FormData();
-formData.append("image", file);
-
-const response = await fetch("http://localhost:8000/api/analyze", {
-  method: "POST",
-  body: formData
-});
-
-const data = await response.json();
-renderAnalysisResult(data);
-```
-
-The UI already expects the result object to have fields for name, calories, protein, carbs, fat, fiber, assessment, and suggestions.
-
----
-
 ## Tech Stack
 
 - **HTML5** for semantic markup
