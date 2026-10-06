@@ -2,7 +2,7 @@
 
 A web-based tool that estimates nutrition and calories from photos of food.
 
-Right now, this repo contains the frontend interface with simulated AI results, built using pure HTML, CSS, and vanilla JavaScript so it's easy to run and test without needing backend setup.
+Right now, this repo contains the frontend interface with simulated AI results, built using pure HTML, CSS, and JavaScript so it's easy to run and test without needing backend setup.
 
 ---
 
@@ -62,13 +62,13 @@ Just double-click `frontend/index.html` or drag it into any web browser.
 
 - **HTML5** for semantic markup
 - **CSS3** (Flexbox, Grid, custom styling, responsive design)
-- **Vanilla JavaScript (ES6+)** for all interactions and state management
+- **JavaScript** for all interactions and state management
 
 ---
 
 ## Key Highlights & Features
 
-- ⚡ **Zero Dependencies**: Pure HTML5, CSS3, and ES6+ JavaScript. No build step or node_modules needed.
+- ⚡ **Zero Dependencies**: Pure HTML5, CSS3, and JavaScript. No build step or node_modules needed.
 - 🎯 **Interactive Vision Scanner**: Drag-and-drop or file upload with simulated real-time inference scanner animation.
 - 📊 **Macro & Calorie Tracking**: Detailed breakdown for calories, protein, carbs, fat, and dietary fiber.
 - 💡 **Dietary Insights**: Contextual health assessments and tailored meal suggestions based on nutritional density.
